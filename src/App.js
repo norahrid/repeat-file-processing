@@ -1,9 +1,7 @@
 import './App.css';
-import FileDrop from './FileDrop';
-
+import FileDrop from './components/FileDrop';
 
 function App() {
-
   return (
     <FileDrop/>
   );
