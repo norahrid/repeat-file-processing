@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Dropzone from 'react-dropzone';
 import _ from "lodash";
 import { scaleLinear } from "d3";
+import { saveAs }from 'file-saver';
 import processRCMFile from "./processRCMFile";
 
 const FileDrop = (props) => {
@@ -251,7 +252,11 @@ const FileDrop = (props) => {
         const remapped = scaleChromosomeData(mapped);
         const finalData = formatDataIntoObject(remapped);
 
-        console.log(finalData)
+        // Create a blob of the data
+        var fileToSave = new Blob([JSON.stringify(finalData)], {
+            type: 'application/json'
+        })
+        saveAs(fileToSave, 'processedGenomeData.json');
         
     }
 
