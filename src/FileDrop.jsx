@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Dropzone from 'react-dropzone';
+import processRCMFile from "./processRCMFile";
 
 const FileDrop = (props) => {
 
@@ -27,16 +28,18 @@ const FileDrop = (props) => {
         });
     }
 
-
     const onProcessFile = async () => {
 
+        let uploadedDocuments = {}
         if (fileList.length > 0) {
             for (const [fileIndex, file] of fileList.entries()) {
                 const fileContents = await getFileByPath(file);
-                console.log(fileContents);
+                let decoder = new TextDecoder();
+                let result = decoder.decode(fileContents);
+                uploadedDocuments[file.name] = result;
             }
         }
-        console.log(fileList)
+        console.log(uploadedDocuments)
     }
 
     return (
